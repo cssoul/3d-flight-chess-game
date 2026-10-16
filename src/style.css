@@ -1,0 +1,167 @@
+:root {
+  --ink: #22303c;
+  --ink-2: #4d5c69;
+  --ink-3: #7c8a96;
+  --primary: #1fa2b8;
+  --primary-deep: #0e6e80;
+  --accent: #ff7a59;
+  --good: #2fae7a;
+  --bad: #e2543f;
+  --panel: rgba(250, 252, 253, 0.78);
+  --panel-strong: rgba(252, 253, 254, 0.92);
+  --line: rgba(34, 48, 60, 0.1);
+  --shadow-lg: 0 18px 48px rgba(28, 44, 58, 0.18), 0 2px 8px rgba(28, 44, 58, 0.08);
+  --shadow-sm: 0 4px 14px rgba(28, 44, 58, 0.12);
+  --radius: 16px;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: #eef2f5;
+  color: var(--ink);
+  font-family: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui,
+    -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input {
+  font-family: inherit;
+}
+
+.frost {
+  background: var(--panel);
+  backdrop-filter: blur(22px) saturate(1.3);
+  -webkit-backdrop-filter: blur(22px) saturate(1.3);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: rgba(34, 48, 60, 0.06);
+  color: var(--ink-2);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 15px;
+  border-radius: 11px;
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  transition: transform 0.14s ease, background 0.18s ease, box-shadow 0.18s ease;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background: #fff;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn.is-on {
+  background: linear-gradient(180deg, #2bb6cb, var(--primary-deep));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 6px 18px rgba(31, 162, 184, 0.34);
+}
+
+.btn.primary {
+  background: linear-gradient(180deg, #2bb6cb, var(--primary-deep));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 10px 26px rgba(31, 162, 184, 0.36);
+}
+
+.btn.primary:hover {
+  background: linear-gradient(180deg, #34c6dc, #12758a);
+}
+
+.btn.ghost {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+/*
+ * 选中态救火规则。
+ * HUD 的按钮同时挂着 `btn` `ghost` `small`，`ghost` 与 `is-on` 同为两个类（优先级相同），
+ * 而 .btn.ghost 在源码里排在 .btn.is-on 之后，于是它的半透明白底把青色底覆盖掉了，
+ * 但 .btn.is-on 的 `color:#fff` 仍然生效 —— 结果就是白底白字，选中项的文字直接看不见。
+ * 这里用三类的更高优先级把底色和文字一起定回来，别再靠调整声明顺序解决。
+ */
+.btn.ghost.is-on {
+  background: linear-gradient(180deg, #2bb6cb, var(--primary-deep));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 6px 18px rgba(31, 162, 184, 0.34);
+}
+
+.canvas-host {
+  position: absolute;
+  inset: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.32s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.pop-enter-active {
+  animation: popIn 0.42s cubic-bezier(0.22, 1.2, 0.36, 1);
+}
+@keyframes popIn {
+  0% {
+    transform: translateY(10px) scale(0.94);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 820px) {
+  :root {
+    --radius: 14px;
+  }
+}
