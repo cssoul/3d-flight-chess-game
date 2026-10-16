@@ -35,8 +35,3 @@ coverage
 .env
 .env.local
 .env.*.local
-
-# 本地工具/运行数据
-.workbuddy
-.wbapp_*.genie
-*.genie
